@@ -1,0 +1,10 @@
+file(GLOB sources *.cpp *.h)
+set(plugins_dir "${CMAKE_SOURCE_DIR}/../FFD/Assets/UTJ/FFD/Plugins/x86_64")
+add_plugin(FFD SOURCES ${sources} PLUGINS_DIR ${plugins_dir})
+
+add_dependencies(FFD MeshUtils)
+target_include_directories(FFD PUBLIC "${CMAKE_SOURCE_DIR}")
+target_link_libraries(FFD MeshUtils ${Poco_LIBRARIES})
+if(LINUX)
+    target_link_libraries(FFD pthread "-Wl,--no-undefined")
+endif()
