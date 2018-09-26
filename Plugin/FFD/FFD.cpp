@@ -8,7 +8,6 @@ struct ffdMeshData
     float3      *normals = nullptr;
     float4      *tangents = nullptr;
     float2      *uv = nullptr;
-    float       *selection = nullptr;
     int         num_vertices = 0;
     int         num_triangles = 0;
     float4x4    transform = float4x4::identity();
@@ -22,6 +21,18 @@ struct ffdSkinData
     int         num_vertices = 0;
     int         num_bones = 0;
     float4x4    root = float4x4::identity();
+};
+
+struct ffdLatticeData
+{
+    Weights8 *weights = nullptr;
+    float3 *lattice_points = nullptr;
+    float3 *lattice_base_points = nullptr;
+    int num_vertices = 0;
+    int div_s = 2;
+    int div_t = 2;
+    int div_u = 2;
+    float4x4 root = float4x4::identity();
 };
 
 
@@ -101,4 +112,22 @@ ffdAPI void ffdApplyReverseSkinning(
         poses[bi] = invert(skin->bindposes[bi] * skin->bones[bi] * iroot);
     }
     SkinningImpl(skin->num_vertices, poses, skin->weights, ipoints, inormals, itangents, opoints, onormals, otangents);
+}
+
+
+ffdAPI void ffdLatticeReset(ffdLatticeData *lattice)
+{
+    // todo
+}
+
+ffdAPI void ffdLatticeSetup(ffdLatticeData *lattice, const float3 points[])
+{
+    // todo
+}
+
+ffdAPI void ffdLatticeApplyDeform(ffdLatticeData *lattice,
+    const float3 ipoints[], const float3 inormals[], const float4 itangents[],
+    float3 opoints[], float3 onormals[], float4 otangents[])
+{
+    // todo
 }
