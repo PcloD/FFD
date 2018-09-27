@@ -25,14 +25,17 @@ struct ffdSkinData
 
 struct ffdLatticeData
 {
-    Weights8 *weights = nullptr;
-    float3 *lattice_points = nullptr;
-    float3 *lattice_base_points = nullptr;
-    int num_vertices = 0;
+    float3 *points = nullptr;
     int div_s = 2;
     int div_t = 2;
     int div_u = 2;
-    float4x4 root = float4x4::identity();
+    float4x4 transform = float4x4::identity();
+};
+
+struct ffdLatticeWeightsData
+{
+    Weights8 *weights = nullptr;
+    int num_vertices = 0;
 };
 
 
@@ -120,12 +123,12 @@ ffdAPI void ffdLatticeReset(ffdLatticeData *lattice)
     // todo
 }
 
-ffdAPI void ffdLatticeSetup(ffdLatticeData *lattice, const float3 points[])
+ffdAPI void ffdLatticeSetup(ffdLatticeData *lattice, ffdLatticeWeightsData *weights, const float3 points[])
 {
     // todo
 }
 
-ffdAPI void ffdLatticeApplyDeform(ffdLatticeData *lattice,
+ffdAPI void ffdLatticeApplyDeform(ffdLatticeData *lattice, ffdLatticeWeightsData *weights,
     const float3 ipoints[], const float3 inormals[], const float4 itangents[],
     float3 opoints[], float3 onormals[], float4 otangents[])
 {
